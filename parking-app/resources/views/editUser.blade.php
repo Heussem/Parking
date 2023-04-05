@@ -16,7 +16,7 @@
           name="name"
           id="exampleInput123"
           aria-describedby="emailHelp123"
-          placeholder="{{$user[0]->name}}" />
+          placeholder="" value="{{old('name',$user[0]->name)}}" />
       </div>
 
       <div class="relative mb-6" data-te-input-wrapper-init>
@@ -25,9 +25,9 @@
           name="email"
           id="exampleInput124"
           aria-describedby="emailHelp124"
-          placeholder="{{$user[0]->email}}" />
+          placeholder="" value="{{old('name',$user[0]->email)}}" />
       </div>
-      
+
     </div>
 
     <div class="relative mb-6 flex justify-center" data-te-input-wrapper-init>
@@ -36,7 +36,7 @@
           name="password"
           id="password"
           aria-describedby="password"
-          placeholder="new password" />
+          placeholder="" value="{{old('name',$user[0]->password)}}" />
     </div>
 
     <div>
@@ -44,7 +44,7 @@
     </div>
 
     <div class="flex justify-center">
-        <button 
+        <button
             class="flex bg-black hover:bg-gray-700 text-white font-bold py-1 px-3 rounded-full justify-center"
             type="submit"
             data-te-ripple-init
@@ -54,5 +54,7 @@
     </div>
   </form>
 </div>
+        </div>
+    </div>
 
 </x-app-layout>

@@ -3,6 +3,8 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\HomeController;
+
 use App\Http\Controllers\ReservationsController;
 use App\Http\Controllers\PlacesController;
 /*
@@ -20,10 +22,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::middleware('admin')->group(function () {
-    Route::get('/users', [UsersController::class, 'index']);
+Route::get('/unverified', function (){
+    return view('unverified');
+});
+
+Route::get('/noadmin', function (){
+    return view('noadmin');
+});
+
+
+Route::middleware(['auth', 'admin','active'])->group(function () {
     Route::get('/create', [UsersController::class, 'create'])->name('user.create');
-    Route::post('/dashboard', [UsersController::class, 'store'])->name('user.store');
+    Route::post('user/create', [UsersController::class, 'store'])->name('user.store');
+    Route::get('/dashboard', [UsersController::class, 'index'])->name('users');
     Route::get('/delete/{id}', [UsersController::class, 'delete'])->name('user.delete');
     Route::get('/edit/{id}', [UsersController::class, 'edit'])->name('user.edit');
     Route::put('/update/{id}', [UsersController::class, 'update'])->name('user.update');
@@ -44,12 +55,13 @@ Route::middleware('admin')->group(function () {
     Route::put('/reservation/update/{id}', [ReservationsController::class, 'update'])->name('reservation.update');
 });
 
-Route::get('/dashboard', function () {
-    return app()->make(UsersController::class)->callAction('index', []);
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth','active'])->group(function () {
+    Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/home/delete{id}',[HomeController::class, 'deleteresa'])->name('home.deleteresa');
+    Route::get('/home/cancel{id}',[HomeController::class, 'cancelresa'])->name('home.cancelresa');
+    Route::get('/home/add',[HomeController::class, 'giveplace'])->name('home.attrib');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

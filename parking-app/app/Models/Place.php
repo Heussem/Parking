@@ -10,7 +10,7 @@ class Place extends Model
     use HasFactory;
     protected $fillable = [
         'numero',
-        'etat',
+        'isFree',
     ];
 
     public function user()

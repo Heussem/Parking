@@ -28,7 +28,7 @@
                     <div class="space-y-3 ">
                         <label class="px-3 text-xs text-gray-500 uppercase dark:text-gray-400">analytics</label>
 
-                        <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="{{ route('dashboard') }}">
+                        <a class="flex items-center px-3 py-2 text-gray-600 transition-colors duration-300 transform rounded-lg dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 dark:hover:text-gray-200 hover:text-gray-700" href="">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3v11.25A2.25 2.25 0 006 16.5h2.25M3.75 3h-1.5m1.5 0h16.5m0 0h1.5m-1.5 0v11.25A2.25 2.25 0 0118 16.5h-2.25m-7.5 0h7.5m-7.5 0l-1 3m8.5-3l1 3m0 0l.5 1.5m-.5-1.5h-9.5m0 0l-.5 1.5m.75-9l3-3 2.148 2.148A12.061 12.061 0 0116.5 7.605" />
                             </svg>
@@ -67,7 +67,7 @@
 
                             <span class="mx-2 text-sm font-medium">Historique
 
-                                
+
                             </span>
                         </a>
                     </div>
@@ -124,7 +124,7 @@
             </div>
         </aside>
     </div>
-    
+
 
     <div class="basis-4/5">
 
@@ -136,7 +136,7 @@
                 <button  class="bg-black hover:bg-gray-700 text-white font-bold py-2 px-4 rounded-full">
                 Créer un utilisateur
             </button></a>
-            
+
 
         </div>
 
@@ -186,7 +186,7 @@
                                     <span class="h-1.5 w-1.5 rounded-full bg-green-600"></span>
                                     Active
                                     </span>
-                                    
+
                                 @else
                                     <span
                                     class="inline-flex items-center gap-1 rounded-full bg-red-300 px-2 py-1 text-xs font-semibold text-white">
@@ -208,13 +208,13 @@
                                     @else
                                         <span class="inline-flex items-center gap-1 rounded-full bg-orange-50 px-2 py-1 text-xs font-semibold text-blue-600">user</span>
                                     @endif
-                    
+
                                 </div>
                             </td>
 
                             <td class="px-6 py-4">
                                 <div class="flex justify-center">
-                                    
+
                                 </div>
                                 <div class="flex justify-end gap-4">
 
@@ -235,10 +235,10 @@
                                             />
                                         </svg>
                                     </a> --}}
-                                        
+
                                         {{-- {{$user->id}} --}}
 
-                                       
+
 
                                         @if (!$user->isActive)
                                             <a href="{{ route('user.verif',$user->id) }}">
@@ -247,8 +247,8 @@
                                                     <svg class="h-6 w-6 text-white"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round">  <path d="M16 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />  <circle cx="8.5" cy="7" r="4" />  <polyline points="17 11 19 13 23 9" /></svg>
                                                     <p class="px-2">Valider</p>
 
-                                                </button>   
-                                            </a> 
+                                                </button>
+                                            </a>
                                         @endif
 
                                         <a x-data="{ tooltip: 'Edite' }" href="{{ route('user.edit',$user->id) }}">
@@ -286,7 +286,7 @@
                                                 />
                                             </svg>
                                         </a>
-                                
+
                                 @endforeach
                             </div>
                         </td>

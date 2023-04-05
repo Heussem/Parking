@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use app\Models\User;
 use GrahamCampbell\ResultType\Success;
+use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 
 class UsersController extends Controller
@@ -20,7 +21,10 @@ class UsersController extends Controller
 
     public function create(Request $request)
     {
-        return view('createUser');
+        $user= Auth::user();
+        return view('createUser', [
+            'user' => $user,
+        ]);
     }
 
     public function store(Request $request)
@@ -30,7 +34,7 @@ class UsersController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);
-    }
+        return redirect()->route('users');    }
 
     public function delete($id)
     {
