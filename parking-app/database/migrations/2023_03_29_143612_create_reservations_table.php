@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained('id')->on('users');
             $table->foreignId('place_id')->constrained('id')->on('places');
             $table->boolean('expired')->default(0);
-            $table->dateTime('end_at');
+            $table->dateTime('end_at')->nullable();
             $table->timestamps();
         });
     }
