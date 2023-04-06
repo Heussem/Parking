@@ -10,21 +10,28 @@
     <div class="flex justify-center gap-4">
 
       <div class="relative mb-6" data-te-input-wrapper-init>
-        <input
-          type="text"
-          name="user"
-          id="exampleInput123"
-          aria-describedby="emailHelp123"
-          placeholder="utilisateur" />
+          <select
+              name="user"
+              id="exampleInput123"
+              placeholder="place">
+              @foreach ($users as $user)
+                  <option value="{{ $user->id }}">{{ $user->email }}</option>
+              @endforeach
+          </select>
+
       </div>
 
       <div class="relative mb-6" data-te-input-wrapper-init>
-        <input
-          type="text"
-          name="place"
-          id="exampleInput123"
-          aria-describedby="emailHelp123"
-          placeholder="place" />
+
+          <select
+              name="place"
+              id="exampleInput123"
+              placeholder="place">
+              @foreach ($places as $place)
+                  <option value="{{ $place->id }}">{{ $place->numero }}</option>
+              @endforeach
+          </select>
+
       </div>
 
     </div>
@@ -38,8 +45,11 @@
           id="exampleInput123"
           aria-describedby="emailHelp123"
           placeholder="date debut" />
+
+
       </div>
-  
+
+
       <div class="relative mb-6" data-te-input-wrapper-init>
         <input
           type="text"
@@ -51,10 +61,10 @@
 
     </div>
 
-    
+
 
     <div class="flex justify-center">
-        <button 
+        <button
             class="flex bg-black hover:bg-gray-700 text-white font-bold py-1 px-3 rounded-full justify-center"
             type="submit"
             data-te-ripple-init

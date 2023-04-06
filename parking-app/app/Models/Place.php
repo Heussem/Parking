@@ -13,6 +13,8 @@ class Place extends Model
         'isFree',
     ];
 
+//    protected $table = 'places';
+
     public function user()
     {
         return $this->belongsTo(User::class);

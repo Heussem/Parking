@@ -23,7 +23,18 @@ class ReservationsController extends Controller
 
     public function create()
     {
-        return view('createReservation');
+        $places = Place::where('isFree',true)->get();
+
+        $reservationActive = Reservation::where('expired','=',false)->get();
+
+        $idUser = $reservationActive->pluck('user_id');
+//        $user = User::wherenot('id','=',$idUser)->get();
+        $user = User::all();
+
+        return view('createReservation')->with([
+            'places'=> $places,
+            'users' => $user,
+        ]);
     }
 
     public function store(Request $request)
@@ -37,8 +48,8 @@ class ReservationsController extends Controller
 
         $reservation->save();
 
-        return redirect()->route('reservations')
-            ->with('success La reservation a été créer !');
+        return redirect()->route('reservations');
+
     }
 
     public function edit($id)
