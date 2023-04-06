@@ -32,9 +32,9 @@ Route::get('/noadmin', function (){
 
 
 Route::middleware(['auth', 'admin','active'])->group(function () {
+    Route::get('/dashboard', [UsersController::class, 'index'])->name('dashboard');
     Route::get('/create', [UsersController::class, 'create'])->name('user.create');
     Route::post('user/create', [UsersController::class, 'store'])->name('user.store');
-    Route::get('/dashboard', [UsersController::class, 'index'])->name('users');
     Route::get('/delete/{id}', [UsersController::class, 'delete'])->name('user.delete');
     Route::get('/edit/{id}', [UsersController::class, 'edit'])->name('user.edit');
     Route::put('/update/{id}', [UsersController::class, 'update'])->name('user.update');
