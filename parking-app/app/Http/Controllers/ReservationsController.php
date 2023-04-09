@@ -23,7 +23,14 @@ class ReservationsController extends Controller
 
     public function create()
     {
-        return view('createReservation');
+        $users = User::doesntHave('reservation')->get();
+        $places = Place::doesntHave('Reservation')->get();
+
+        return view('createReservation', [
+            'users' => $users,
+            'places' => $places,
+
+        ]);
     }
 
     public function store(Request $request)
