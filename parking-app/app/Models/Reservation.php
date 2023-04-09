@@ -24,4 +24,12 @@ class Reservation extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function updateExpired()
+    {
+        if ($this->end_at < now()) {
+            $this->expired = true;
+            $this->save();
+        }
+    }
 }

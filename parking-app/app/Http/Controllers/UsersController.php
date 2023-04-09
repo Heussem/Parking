@@ -6,16 +6,20 @@ use Illuminate\Http\Request;
 use app\Models\User;
 use GrahamCampbell\ResultType\Success;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Reservation;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 
 class UsersController extends Controller
 {
     public function index()
     {
-        $users = User::orderBy('isActive')->orderBy('admin', 'DESC')->get();
+        $users = User::orderBy('admin', 'DESC')->orderBy('isActive')->orderBy('created_at', 'DESC')->get();
+        $users2 = User::doesntHave('reservation')->get();
 
         return view('dashboard', [
             'users' => $users,
+            'users2' => $users2,
+
         ]);
     }
 
@@ -45,7 +49,6 @@ class UsersController extends Controller
     {
         $user = User::findOrFail($id);
         $user->delete();
-
 
         return redirect()->route('dashboard')
             ->with('success', 'utilisateur a bien été supprimé');
