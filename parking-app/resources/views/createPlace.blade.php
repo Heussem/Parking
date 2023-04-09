@@ -7,7 +7,7 @@
  <div class="block max-w-md rounded-lg bg-white p-6 shadow-lg dark:bg-neutral-700">
   <form action="{{route ('place.store')}}" method="POST">
     @csrf
-    <div class="flex flex-col flex items-center px-10 py-10">
+    <div class="flex flex-col items-center px-10 py-10">
 <p class="mb-6">Veuillez saisir une place (4 caractères)</p>
       <div class="relative mb-3" data-te-input-wrapper-init>
         <input

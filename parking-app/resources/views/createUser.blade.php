@@ -7,7 +7,7 @@
  <div class="block max-w-md rounded-lg bg-white p-6 shadow-lg dark:bg-neutral-700">
   <form action="{{route ('user.store')}}" method="POST">
     @csrf
-    <div align="center" class="flex flex-col flex items-center px-20 py-16">
+    <div align="center" class="flex flex-col items-center px-20 py-16">
 
         <p class="mb-5">Veuillez remplir tous les champs du formulaire :</p>
       <div class="flex justify-center" data-te-input-wrapper-init>
@@ -40,7 +40,7 @@
       </div>
 
     <div class="flex justify-center mt-6">
-      <input type="checkbox" name="active" id="active" value="1" {{$user->isActive ? 'checked' : ''}}>
+      <input type="checkbox" name="active" id="active" value="1">
         <span class="pl-3">Valider le compte ?</span>
     </div>
 

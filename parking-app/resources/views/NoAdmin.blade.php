@@ -11,7 +11,7 @@
 <x-app-layout>
 <div class="mx-16 py-24 bg-white">
 
-        <div class=" flex flex-col flex items-center" >
+        <div class=" flex flex-col items-center" >
             <img style="width:120px"src="image/erreur.svg" alt="erreur"> </img>
             <h1 class="pb-3 mt-8 text-2xl font-extrabold">Compte non Admin </h1>
             <p>Votre compte n'a pas le statut admin vous ne pouvez pas accéder a cette page,</br> vous pouvez cependant appuyer sur le bouton ci-dessous pour retourner a votre espace</p>

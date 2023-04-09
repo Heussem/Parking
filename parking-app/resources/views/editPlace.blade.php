@@ -8,7 +8,7 @@
   <form action="{{route ('place.update', $place[0]->id)}}" method="POST">
     @method('PUT')
     @csrf
-    <div class="flex flex-col flex items-center px-10 py-10">
+    <div class="flex flex-col items-center px-10 py-10">
 <p class="mb-6">Veuillez modifier la place (4 caractères)</p>
       <div class="relative mb-3" data-te-input-wrapper-init>
         <input

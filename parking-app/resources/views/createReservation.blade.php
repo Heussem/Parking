@@ -32,27 +32,26 @@
       
       </div>
         
-
     </div>
 
     <div class="flex justify-center gap-4">
 
       <div class="relative mb-6" data-te-input-wrapper-init>
         <input
-          type="text"
+          type="date"
           name="date_debut"
           id="exampleInput123"
           aria-describedby="emailHelp123"
-          placeholder="date debut" />
+          placeholder="" value="{{ $date->toDateString()}}" />
       </div>
   
       <div class="relative mb-6" data-te-input-wrapper-init>
         <input
-          type="text"
+          type="date"
           name="date_fin"
           id="exampleInput123"
           aria-describedby="emailHelp123"
-          placeholder="date fin" />
+          placeholder="" value="{{ $dateF->toDateString()}}" />
       </div>
 
     </div>

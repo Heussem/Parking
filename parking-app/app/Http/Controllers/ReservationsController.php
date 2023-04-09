@@ -6,6 +6,7 @@ use App\Models\Reservation;
 use App\Models\User;
 use App\Models\Place;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use function Pest\Laravel\get;
@@ -25,10 +26,16 @@ class ReservationsController extends Controller
     {
         $users = User::doesntHave('reservation')->get();
         $places = Place::doesntHave('Reservation')->get();
+        $date = Carbon::now();
+        $time = 7;
+        $dateF = Carbon::now()->addDays($time);
 
         return view('createReservation', [
             'users' => $users,
             'places' => $places,
+            'date' => $date,
+            'dateF' => $dateF,
+
 
         ]);
     }

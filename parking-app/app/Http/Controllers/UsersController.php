@@ -29,11 +29,15 @@ class UsersController extends Controller
 
     public function store(Request $request)
     {
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-        ]);
+        $user = new User;
+
+        $user->name = request('name');
+        $user->email = request('email');
+        $user->password = request('password');
+        $user->isActive = $request->input('active', 0);
+
+        $user->save();
+
         return redirect()->route('dashboard');
     }
 
