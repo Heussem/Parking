@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use app\Models\User;
 use GrahamCampbell\ResultType\Success;
-use Illuminate\Support\Facades\Auth;
 use App\Models\Reservation;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 
@@ -13,7 +12,9 @@ class UsersController extends Controller
 {
     public function index()
     {
+        //recuperer tout les users en les triant
         $users = User::orderBy('admin', 'DESC')->orderBy('isActive')->orderBy('created_at', 'DESC')->get();
+        //recuperer les utilisateurs n'ayant pas de reservation
         $users2 = User::doesntHave('reservation')->get();
 
         return view('dashboard', [
@@ -23,12 +24,9 @@ class UsersController extends Controller
         ]);
     }
 
-    public function create(Request $request)
+    public function create()
     {
-        $user = Auth::user();
-        return view('createUser', [
-            'user' => $user,
-        ]);
+        return view('createUser', []);
     }
 
     public function store(Request $request)

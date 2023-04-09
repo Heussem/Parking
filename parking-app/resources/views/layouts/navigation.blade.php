@@ -8,7 +8,7 @@
                     <a class="flex" href="{{ route('home') }}">
                         {{-- <x-application-logo class="block h-9 w-auto fill-current text-gray-800" /> --}}
                         <div class="flex flex-row justify-center">
-                        <img class="h-10 w-auto fill-current text-gray-800" src="image/ligue.svg" alt="">
+                        <img class="h-14 w-auto fill-current text-gray-800 mr-7" src="image/ligue.svg" alt="">
                         <p class="mt-4 lg-7 font-bold">Maison des ligues</p>
                         </div>
                     </a>
