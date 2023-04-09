@@ -22,16 +22,16 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/unverified', function (){
+Route::get('/unverified', function () {
     return view('unverified');
 });
 
-Route::get('/noadmin', function (){
+Route::get('/noadmin', function () {
     return view('noadmin');
 });
 
 
-Route::middleware(['auth', 'admin','active'])->group(function () {
+Route::middleware(['auth', 'admin', 'active'])->group(function () {
     Route::get('/dashboard', [UsersController::class, 'index'])->name('dashboard');
     Route::get('/create', [UsersController::class, 'create'])->name('user.create');
     Route::post('user/create', [UsersController::class, 'store'])->name('user.store');
@@ -45,7 +45,9 @@ Route::middleware(['auth', 'admin','active'])->group(function () {
     Route::get('/places/create', [PlacesController::class, 'create'])->name('place.create');
     Route::post('/places/create', [PlacesController::class, 'store'])->name('place.store');
     Route::get('/places/delete/{id}', [PlacesController::class, 'delete'])->name('place.delete');
-    Route::get('/places/edit', [PlacesController::class, 'edit'])->name('place.edit');
+    Route::get('/places/edit{id}', [PlacesController::class, 'edit'])->name('place.edit');
+    Route::put('/places/update/{id}', [PlacesController::class, 'update'])->name('place.update');
+
 
     Route::get('/reservations', [ReservationsController::class, 'index'])->name('reservations');
     Route::get('/reservations/create', [ReservationsController::class, 'create'])->name('reservation.create');
@@ -57,11 +59,11 @@ Route::middleware(['auth', 'admin','active'])->group(function () {
 
 
 
-Route::middleware(['auth','active'])->group(function () {
+Route::middleware(['auth', 'active'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
-    Route::get('/home/delete{id}',[HomeController::class, 'deleteresa'])->name('home.deleteresa');
-    Route::get('/home/cancel{id}',[HomeController::class, 'cancelresa'])->name('home.cancelresa');
-    Route::get('/home/add',[HomeController::class, 'giveplace'])->name('home.attrib');
+    Route::get('/home/delete{id}', [HomeController::class, 'deleteresa'])->name('home.deleteresa');
+    Route::get('/home/cancel{id}', [HomeController::class, 'cancelresa'])->name('home.cancelresa');
+    Route::get('/home/add', [HomeController::class, 'giveplace'])->name('home.attrib');
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');

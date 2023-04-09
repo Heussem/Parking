@@ -21,7 +21,7 @@ class UsersController extends Controller
 
     public function create(Request $request)
     {
-        $user= Auth::user();
+        $user = Auth::user();
         return view('createUser', [
             'user' => $user,
         ]);
@@ -34,7 +34,8 @@ class UsersController extends Controller
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);
-        return redirect()->route('users');    }
+        return redirect()->route('dashboard');
+    }
 
     public function delete($id)
     {

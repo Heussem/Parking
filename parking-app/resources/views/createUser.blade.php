@@ -54,7 +54,7 @@
             type="submit"
             data-te-ripple-init
             data-te-ripple-color="light">
-            Sign up
+            Créer un compte
         </button>
       </div>
   </form>
