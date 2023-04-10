@@ -64,6 +64,7 @@ Route::middleware(['auth', 'active'])->group(function () {
     Route::get('/home/delete{id}', [HomeController::class, 'deleteresa'])->name('home.deleteresa');
     Route::get('/home/cancel{id}', [HomeController::class, 'cancelresa'])->name('home.cancelresa');
     Route::get('/home/add', [HomeController::class, 'giveplace'])->name('home.attrib');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
