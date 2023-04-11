@@ -42,7 +42,10 @@ class HomeController extends Controller
             $nomplace = $place[0]->numero;
         }
 
-        $expired = Reservation::where('expired', '=', true)->where('user_id', '=', $user->id)->orderby('created_at', 'desc')->get();
+        $expired = Reservation::where('expired', '=', true)
+            ->where('user_id', '=', $user->id)
+            ->where('archived','=',false)
+            ->orderby('created_at', 'desc')->get();
 
         if ($activeresa > 0) {
             return view('home', [
@@ -95,8 +98,8 @@ class HomeController extends Controller
 
     public function deleteresa($id)
     {
-        $idresa = Reservation::findOrFail($id);
-        $idresa->delete();
+        Reservation::where('id', $id)->update(['archived' => true]);
+
 
         return redirect()->route('home');
     }

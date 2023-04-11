@@ -39,7 +39,7 @@ class ReservationsController extends Controller
             ->orWhereDoesntHave('reservation')
             ->get();
 
-        
+
         // dd($users);
 
 
