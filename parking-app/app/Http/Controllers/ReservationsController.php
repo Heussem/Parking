@@ -15,7 +15,7 @@ class ReservationsController extends Controller
 {
     public function index()
     {
-        $reservations = Reservation::with('user')->get();
+        $reservations = Reservation::with('user')->where('expired', 0)->get();
 
         return view('reservations', [
             'reservations' => $reservations
@@ -24,9 +24,16 @@ class ReservationsController extends Controller
 
     public function create()
     {
-        $users = User::doesntHave('reservation')->get();
-        $places = Place::doesntHave('Reservation')->get();
-        $date = Carbon::now();
+        // $users = User::doesntHave('reservation')->get();
+        $reservationsNonActive = reservation::whereNot('expired', 0)->get();
+        $users = User::with('reservation')->get();
+        $users = $users->$reservationsNonActive->where('expired', 0)->get();
+        // dd($users);
+
+
+        $places = Place::all()->where('isFree', 1);
+
+        $date = now();
         $time = 7;
         $dateF = Carbon::now()->addDays($time);
 
@@ -48,8 +55,10 @@ class ReservationsController extends Controller
         $reservation->place_id = request('place');
         $reservation->created_at = request('date_debut');
         $reservation->end_at = request('date_fin');
-
+        $reservations = Reservation::with('place')->get();
+        $reservation->place->update(['isFree' => false]);
         $reservation->save();
+
 
         return redirect()->route('reservations')
             ->with('success La reservation a été créer !');
@@ -86,5 +95,36 @@ class ReservationsController extends Controller
 
         return redirect()->route('reservations')
             ->with('success, la reservation a bien été supprimé');
+    }
+
+    public function historique()
+    {
+        $reservations = Reservation::with('user')->where('expired', 1)->orderBy('end_at', 'desc')->get();
+
+        return view('historique', [
+            'reservations' => $reservations
+        ]);
+    }
+
+    public function cancel($id)
+    {
+        $reservation = Reservation::find($id);
+        $reservation->expired = 1;
+        $reservation->place->update(['isFree' => true]);
+        $reservation->update(['end_at' => now()]);
+
+        $reservation->save();
+
+        return redirect()->route('reservations');
+    }
+
+
+    public function file()
+    {
+        $reservations = Reservation::with('user')->where('expired', 1)->get();
+
+        return view('fileAttente', [
+            'reservations' => $reservations
+        ]);
     }
 }
