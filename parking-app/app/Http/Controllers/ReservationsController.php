@@ -24,16 +24,28 @@ class ReservationsController extends Controller
 
     public function create()
     {
-        // $users = User::doesntHave('reservation')->get();
-        $reservationsNonActive = reservation::whereNot('expired', 0)->get();
-        $users = User::with('reservation')->get();
-        $users = $users->$reservationsNonActive->where('expired', 0)->get();
+        $users = User::doesntHave('reservation')->get();
+
+
+//        $users = User::whereHas('reservation',function ($query) {
+//            $query->where('expired',true)
+//                  ->orwhere(User::doesntHave('reservation'));
+//        })->get();
+
+        //recupére les users qui n'ont pas de réservations active (de réservations qui ne sont pas expirée)
+        $users = User::whereDoesntHave('reservation', function ($query) {
+            $query->where('expired',false);
+        })
+            ->orWhereDoesntHave('reservation')
+            ->get();
+
+        
         // dd($users);
 
 
         $places = Place::all()->where('isFree', 1);
 
-        $date = now();
+        $date = Carbon::now();
         $time = 7;
         $dateF = Carbon::now()->addDays($time);
 
@@ -93,7 +105,7 @@ class ReservationsController extends Controller
         $reservation = Reservation::findOrFail($id);
         $reservation->delete();
 
-        return redirect()->route('reservations')
+        return redirect()->route('historique')
             ->with('success, la reservation a bien été supprimé');
     }
 
@@ -103,7 +115,8 @@ class ReservationsController extends Controller
 
         return view('historique', [
             'reservations' => $reservations
-        ]);
+        ])
+            ;
     }
 
     public function cancel($id)
