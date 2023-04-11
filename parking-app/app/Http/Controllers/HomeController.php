@@ -109,7 +109,6 @@ class HomeController extends Controller
         $randomFreePlace = $freeplace->random();
 
         //une réservation est active 7j par default, cela est definit dans la variable $time
-        $date = Carbon::now();
         $time = 7;
         $dateF = Carbon::now()->addDays($time);
 

@@ -55,15 +55,22 @@ Route::middleware(['auth', 'admin', 'active'])->group(function () {
     Route::get('/reservation/delete/{id}', [ReservationsController::class, 'delete'])->name('reservation.delete');
     Route::get('/reservation/edit/{id}', [ReservationsController::class, 'edit'])->name('reservation.edit');
     Route::put('/reservation/update/{id}', [ReservationsController::class, 'update'])->name('reservation.update');
+
+    Route::get('/historique', [ReservationsController::class, 'historique'])->name('historique');
+    Route::get('/cancel{id}', [ReservationsController::class, 'cancel'])->name('cancel');
+
+
+    Route::get('/fileAttente', [ReservationsController::class, 'file'])->name('file.attente');
 });
 
 
 
 Route::middleware(['auth', 'active'])->group(function () {
     Route::get('/home', [HomeController::class, 'index'])->name('home');
+    Route::get('/home/add', [HomeController::class, 'giveplace'])->name('home.attrib');
     Route::get('/home/delete{id}', [HomeController::class, 'deleteresa'])->name('home.deleteresa');
     Route::get('/home/cancel{id}', [HomeController::class, 'cancelresa'])->name('home.cancelresa');
-    Route::get('/home/add', [HomeController::class, 'giveplace'])->name('home.attrib');
+
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
