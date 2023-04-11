@@ -9,62 +9,57 @@
     @csrf
     <div class="flex justify-center gap-4">
 
-      <div class="relative mb-6" data-te-input-wrapper-init>
-          <select
-              name="user"
-              id="exampleInput123"
-              placeholder="place">
-              @foreach ($users as $user)
-                  <option value="{{ $user->id }}">{{ $user->email }}</option>
-              @endforeach
-          </select>
+      <div class="relative mb-6 " data-te-input-wrapper-init>
+        <select name="user" id="users-select">
+          <option value="">Utilisateurs sans réservation</option>
 
+          @foreach ($users as $user)
+            <option value="{{$user->id}}">{{ $user->name}}</option>
+          @endforeach
+          
+        </select>
       </div>
 
       <div class="relative mb-6" data-te-input-wrapper-init>
+        <select name="place" id="place-select">
+          <option value="">Place libre</option>
 
-          <select
-              name="place"
-              id="exampleInput123"
-              placeholder="place">
-              @foreach ($places as $place)
-                  <option value="{{ $place->id }}">{{ $place->numero }}</option>
-              @endforeach
-          </select>
-
+          @foreach ($places as $place)
+             <option value="{{$place->id}}">{{ $place->numero}}</option>
+          @endforeach
+          
+        </select>
+      
       </div>
-
+        
     </div>
 
     <div class="flex justify-center gap-4">
 
       <div class="relative mb-6" data-te-input-wrapper-init>
         <input
-          type="text"
+          type="date"
           name="date_debut"
           id="exampleInput123"
           aria-describedby="emailHelp123"
-          placeholder="date debut" />
-
-
+          placeholder="" value="{{ $date->toDateString()}}" />
       </div>
-
-
+  
       <div class="relative mb-6" data-te-input-wrapper-init>
         <input
-          type="text"
+          type="date"
           name="date_fin"
           id="exampleInput123"
           aria-describedby="emailHelp123"
-          placeholder="date fin" />
+          placeholder="" value="{{ $dateF->toDateString()}}" />
       </div>
 
     </div>
 
-
+    
 
     <div class="flex justify-center">
-        <button
+        <button 
             class="flex bg-black hover:bg-gray-700 text-white font-bold py-1 px-3 rounded-full justify-center"
             type="submit"
             data-te-ripple-init

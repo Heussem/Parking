@@ -42,4 +42,25 @@ class PlacesController extends Controller
         return redirect()->route('places')
             ->with('success, la place a bien été supprimé');
     }
+
+    public function edit($id)
+    {
+
+        $place = Place::where('id', $id)->get();
+
+        return view('editPlace', [
+            'place' => $place,
+        ]);
+    }
+
+    public function update($id, Request $request)
+    {
+        $place = Place::find($id);
+        $place->update([
+            'numero' => $request->numero,
+        ]);
+
+        return redirect()->route('places')
+            ->with('success', 'created successfully!');
+    }
 }

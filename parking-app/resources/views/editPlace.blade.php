@@ -5,17 +5,18 @@
         <div class="">
 
  <div class="block max-w-md rounded-lg bg-white p-6 shadow-lg dark:bg-neutral-700">
-  <form action="{{route ('place.store')}}" method="POST">
+  <form action="{{route ('place.update', $place[0]->id)}}" method="POST">
+    @method('PUT')
     @csrf
     <div class="flex flex-col items-center px-10 py-10">
-<p class="mb-6">Veuillez saisir une place (4 caractères)</p>
+<p class="mb-6">Veuillez modifier la place (4 caractères)</p>
       <div class="relative mb-3" data-te-input-wrapper-init>
         <input
           type="text"
           name="numero"
           id="exampleInput123"
           aria-describedby="emailHelp123"
-          placeholder="A000" />
+          placeholder="" value="{{old('name',$place[0]->numero)}}" />
       </div>
 
     </div>
@@ -26,7 +27,7 @@
             type="submit"
             data-te-ripple-init
             data-te-ripple-color="light">
-            Creer une place
+            Update
         </button>
       </div>
   </form>

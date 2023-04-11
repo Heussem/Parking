@@ -5,42 +5,48 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use app\Models\User;
 use GrahamCampbell\ResultType\Success;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Reservation;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 
 class UsersController extends Controller
 {
     public function index()
     {
-        $users = User::orderBy('isActive')->orderBy('admin', 'DESC')->get();
+        //recuperer tout les users en les triant
+        $users = User::orderBy('admin', 'DESC')->orderBy('isActive')->orderBy('created_at', 'DESC')->get();
+        //recuperer les utilisateurs n'ayant pas de reservation
+        $users2 = User::doesntHave('reservation')->get();
 
         return view('dashboard', [
             'users' => $users,
+            'users2' => $users2,
+
         ]);
     }
 
-    public function create(Request $request)
+    public function create()
     {
-        $user= Auth::user();
-        return view('createUser', [
-            'user' => $user,
-        ]);
+        return view('createUser', []);
     }
 
     public function store(Request $request)
     {
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-        ]);
-        return redirect()->route('users');    }
+        $user = new User;
+
+        $user->name = request('name');
+        $user->email = request('email');
+        $user->password = request('password');
+        $user->isActive = $request->input('active', 0);
+
+        $user->save();
+
+        return redirect()->route('dashboard');
+    }
 
     public function delete($id)
     {
         $user = User::findOrFail($id);
         $user->delete();
-
 
         return redirect()->route('dashboard')
             ->with('success', 'utilisateur a bien été supprimé');

@@ -6,6 +6,7 @@ use App\Models\Reservation;
 use App\Models\User;
 use App\Models\Place;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 use function Pest\Laravel\get;
@@ -23,17 +24,19 @@ class ReservationsController extends Controller
 
     public function create()
     {
-        $places = Place::where('isFree',true)->get();
+        $users = User::doesntHave('reservation')->get();
+        $places = Place::doesntHave('Reservation')->get();
+        $date = Carbon::now();
+        $time = 7;
+        $dateF = Carbon::now()->addDays($time);
 
-        $reservationActive = Reservation::where('expired','=',false)->get();
+        return view('createReservation', [
+            'users' => $users,
+            'places' => $places,
+            'date' => $date,
+            'dateF' => $dateF,
 
-        $idUser = $reservationActive->pluck('user_id');
-//        $user = User::wherenot('id','=',$idUser)->get();
-        $user = User::all();
 
-        return view('createReservation')->with([
-            'places'=> $places,
-            'users' => $user,
         ]);
     }
 
@@ -48,8 +51,8 @@ class ReservationsController extends Controller
 
         $reservation->save();
 
-        return redirect()->route('reservations');
-
+        return redirect()->route('reservations')
+            ->with('success La reservation a été créer !');
     }
 
     public function edit($id)
